@@ -17,12 +17,20 @@ export default function HomePage() {
       </h1>
 
       <div>
-        <p>\\Strings will go here...\\</p>
+        <p>Welcome to the Stacker!</p>
+        <p>
+          Enter your string and click Submit to add a new string to the top of
+          the stack.
+        </p>
       </div>
 
       <div>
-        <p>Want to add more strings?</p>
-        <a href="/stacker">Click Here</a>
+        <form method="POST" action="#">
+          <label name="string">
+            <input type="text" />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );
