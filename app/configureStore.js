@@ -6,8 +6,17 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
+import { getAllStrings } from './ApiCalls';
 
-export default function configureStore(initialState = {}, history) {
+const INITIAL_STATE = () => {
+  const res = getAllStrings();
+  return res.data.response;
+};
+
+export default function configureStore(
+  initialState = INITIAL_STATE() || [],
+  history,
+) {
   let composeEnhancers = compose;
   const reduxSagaMonitorOptions = {};
 

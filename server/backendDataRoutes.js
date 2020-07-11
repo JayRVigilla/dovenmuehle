@@ -7,7 +7,7 @@ const BackendData = require('./BackendData.js');
 
 router.get('/', async (req, res, next) => {
   try {
-    const response = await BackendData.get();
+    const response = BackendData.get();
     return res.json({ response });
   } catch (err) {
     return next(err);
@@ -19,10 +19,10 @@ router.get('/', async (req, res, next) => {
  * { clientString }
  * => {data:[clientString, ... , oldestString]} */
 
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
   try {
-    const response = await BackendData.post(req.body);
-    return res.status(201).json({ response });
+    BackendData.post(req.body.string);
+    return res.status(201).send({ message: 'String prepended' });
   } catch (err) {
     return next(err);
   }

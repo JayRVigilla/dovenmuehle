@@ -2,14 +2,16 @@
  * HomePage
  *
  * This is the first thing users see of our App, at the '/' route
- *
+ * Holds StringList component
+ * makes axios call and passes strings as prop
  */
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import StringList from './StringList';
 
-export default function HomePage() {
+function HomePage() {
   return (
     <div>
       <h1>
@@ -17,13 +19,15 @@ export default function HomePage() {
       </h1>
 
       <div>
-        <p>\\Strings will go here...\\</p>
+        <p>Want to add more strings?</p>
+        <a href="/add">Click Here</a>
       </div>
 
       <div>
-        <p>Want to add more strings?</p>
-        <a href="/stacker">Click Here</a>
+        <StringList />
       </div>
     </div>
   );
 }
+
+export default HomePage;
