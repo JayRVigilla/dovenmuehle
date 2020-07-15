@@ -1,21 +1,16 @@
-const fs = require('fs');
-const prependFile = require('prepend-file');
-const dataFile = './server/backendData.txt';
-
 class BackendData {
-  static get() {
-    const data = fs.readFileSync(dataFile, 'utf-8');
-    const dataTrimed = data.slice(0, -2);
-    const stringArray = dataTrimed.split(', ');
-    return stringArray;
+  constructor() {
+    this.dataVar = ['test'];
   }
 
-  static post(clientString) {
-    prependFile(dataFile, `${clientString}, `, err => {
-      if (err) throw err;
-      const data = fs.readFileSync(dataFile, 'utf-8');
-      data.split(', ');
-    });
+  fetch() {
+    const res = this.dataVar;
+    return res;
+  }
+
+  post(str) {
+    this.dataVar.unshift(str);
+    return this.dataVar;
   }
 }
 

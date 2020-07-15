@@ -2,13 +2,15 @@ const express = require('express');
 const router = new express.Router();
 const BackendData = require('./BackendData.js');
 
+const server = new BackendData();
+
 /**  GET /data
  * => {data:[newestString, ... , oldestString]} */
 
 router.get('/', async (req, res, next) => {
   try {
-    const response = BackendData.get();
-    return res.json({ response });
+    const response = server.fetch();
+    return res.status(200).json({ response });
   } catch (err) {
     return next(err);
   }
@@ -21,8 +23,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   try {
-    BackendData.post(req.body.string);
-    return res.status(201).send({ message: 'String prepended' });
+    const result = server.post(req.body.string);
+    return res.status(201).send({ message: 'String prepended', result });
   } catch (err) {
     return next(err);
   }

@@ -12,6 +12,15 @@ import messages from './messages';
 import StringList from './StringList';
 
 function HomePage() {
+  // const mapStateToProps = state => ({
+  //   string: state.string,
+  // });
+
+  // const mapDispatchToProps = dispatch => {
+  //   onAddString: str => dispatch({ type: 'ADD_STRING', value: str }),
+  //   onGetStrings: () => dispatch({ type: 'FETCH_STRINGS', value: '' })
+  // };
+
   return (
     <div>
       <h1>
