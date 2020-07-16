@@ -11,16 +11,18 @@ import PropTypes from 'prop-types';
 // import { getAllStrings } from '../../ApiCalls';
 
 function StringList({ stringList, madeReq }) {
-  // const [stringArray, setStringArray] = useState(stringList);
-  // const [madeReq, setMadeReq] = useState(null);
-
   StringList.propTypes = {
     stringList: PropTypes.array,
   };
 
-  // useEffect(function (){ }, [stringList, madeReq]);
-
   function renderedList(arr) {
+    if (arr.length === 0) {
+      return (
+        <div>
+          <p>No strings in list</p>
+        </div>
+      );
+    }
     return (
       <div>
         <ul>

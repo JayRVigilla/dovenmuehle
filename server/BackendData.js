@@ -1,6 +1,6 @@
 class BackendData {
   constructor() {
-    this.dataVar = [];
+    this.dataVar = ['test string', 'booboobutt'];
   }
 
   fetch() {

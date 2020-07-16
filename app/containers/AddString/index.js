@@ -6,15 +6,16 @@
  */
 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { dispatch } from 'redux-saga';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import sendPostToAPI from './actions';
+// import sendPostToAPI from './actions';
 import messages from './messages';
 
 function AddString() {
+  // const dispatch = useDispatch();
   const history = useHistory();
-  const dispatch = useDispatch();
+
   const [clientString, setClientString] = useState('');
 
   const handleChange = evt => {
@@ -23,7 +24,7 @@ function AddString() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch(sendPostToAPI(clientString));
+    dispatch({ type: 'ADD_STING', string: clientString });
     setClientString('');
     history.push('/');
   };
