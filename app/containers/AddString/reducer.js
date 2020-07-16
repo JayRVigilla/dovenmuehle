@@ -5,14 +5,16 @@
  */
 
 /* eslint-disable default-case, no-param-reassign */
-const INITIAL_STATE = { memes: [] };
+const INITIAL_STATE = { strings: [] };
 
-const addStringReducer = (state = INITIAL_STATE, action) => {
+const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'ADD_STRING':
-      return { ...state, strings: [...state.strings, action.payload] };
+      return { ...state, strings: [action.payload, ...state.strings] };
+    default:
+      return state;
   }
-  return undefined; // TODO: linter wants return at end of arrow function, this feels hacky
 };
+// end
 
-export default addStringReducer;
+export default reducer;

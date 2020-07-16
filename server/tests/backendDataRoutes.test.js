@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 const { request } = require('express');
 const app = require('../index');
 

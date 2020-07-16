@@ -1,20 +1,20 @@
 /*
  *
- * HomePage reducer
+ * GetString reducer
  *
  */
-// import { prependString } from '../../ApiCalls';
 
 /* eslint-disable default-case, no-param-reassign */
-const stringsReducer = (state = [], action) => {
-  const newState = [...state];
-  switch (action.type) {
-    case 'ADD_STRING':
-      // const res = prependString(str);
-      newState.strings = [action.value + newState.strings];
-      break;
-  }
-  return newState;
-};
+const INITIAL_STATE = { strings: [] };
 
-export default stringsReducer;
+const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case 'GET_STRINGS':
+      return state;
+    default:
+      return state;
+  }
+};
+// end
+
+export default reducer;

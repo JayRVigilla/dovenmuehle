@@ -1,15 +1,19 @@
 /*
  * HomePage
  *
- * This is the first thing users see of our App, at the '/' route
- * Holds StringList component
+ * found at '/'
+ * Holds StringList component, passes props
  * makes axios call and passes strings as prop
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
+import uuid from 'uuid';
 import messages from './messages';
 import StringList from './StringList';
+import { getAllStrings } from '../../ApiCalls';
+
+// import { useSelector } from 'react-redux';
 
 function HomePage() {
   // const mapStateToProps = state => ({
@@ -20,6 +24,33 @@ function HomePage() {
   //   onAddString: str => dispatch({ type: 'ADD_STRING', value: str }),
   //   onGetStrings: () => dispatch({ type: 'FETCH_STRINGS', value: '' })
   // };
+  const [stringList, setStringList] = useState(null);
+  const [madeReq, setMadeReq] = useState(false);
+
+  useEffect(function renderStringList() {
+    function addUniqueIds(array) {
+      const newArray = array.map(val => {
+        const dataObj = {
+          val,
+          key: uuid(),
+        };
+        return dataObj;
+      });
+      return newArray;
+    }
+    async function getStringList() {
+      try {
+        const res = await getAllStrings();
+        const strings = addUniqueIds(res.data.response);
+        setStringList(strings);
+        setMadeReq(true);
+        //   if (stringList !== stringsArray) setStringList(stringsArray);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getStringList();
+  }, []);
 
   return (
     <div>
@@ -33,7 +64,7 @@ function HomePage() {
       </div>
 
       <div>
-        <StringList />
+        <StringList stringList={stringList} madeReq={madeReq} />
       </div>
     </div>
   );
