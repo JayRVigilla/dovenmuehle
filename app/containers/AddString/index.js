@@ -6,14 +6,16 @@
  */
 
 import React, { useState } from 'react';
-import { dispatch } from 'redux-saga';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-// import sendPostToAPI from './actions';
+import { compose } from 'redux';
+import injectSaga from 'utils/injectSaga';
+import { DAEMON } from 'utils/constants';
+import saga from './saga';
 import messages from './messages';
+import { prependString } from '../../ApiCalls';
 
 function AddString() {
-  // const dispatch = useDispatch();
   const history = useHistory();
 
   const [clientString, setClientString] = useState('');
@@ -24,7 +26,7 @@ function AddString() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch({ type: 'ADD_STING', string: clientString });
+    prependString(clientString);
     setClientString('');
     history.push('/');
   };
@@ -54,5 +56,7 @@ function AddString() {
     </div>
   );
 }
+const withSaga = injectSaga({ key: 'addstring', saga, mode: DAEMON });
 
-export default AddString;
+export default compose(withSaga)(AddString);
+// export default AddString;

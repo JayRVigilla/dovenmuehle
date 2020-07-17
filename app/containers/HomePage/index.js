@@ -9,10 +9,11 @@
 import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
-// import { dispatch } from 'redux-saga';
+// import { useStore } from 'react-redux';
 import uuid from 'uuid';
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
+// import rootSaga from './saga';
 import saga from './saga';
 import messages from './messages';
 import StringList from './StringList';
@@ -30,6 +31,7 @@ function HomePage() {
   const [stringList, setStringList] = useState(null);
   const [madeReq, setMadeReq] = useState(false);
 
+  // const store = useStore();
   useEffect(
     function renderStringList() {
       function addUniqueIds(array) {
@@ -45,6 +47,7 @@ function HomePage() {
       async function getStringList() {
         try {
           const res = await getAllStrings();
+          // store.runSaga(rootSaga);
           // dispatch({ type: 'GET_STRINGS' });
           const strings = addUniqueIds(res.data.response);
           if (stringList === null) setStringList(strings);

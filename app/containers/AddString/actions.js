@@ -10,6 +10,6 @@ export default async function sendPostToAPI(string) {
 function addString(string) {
   return {
     type: 'ADD_STRING',
-    string,
+    payload: string,
   };
 }

@@ -13,13 +13,12 @@ async function getAllStrings() {
 }
 
 async function prependString(string) {
-  // console.log('input valuein prependString()', string);
   try {
     const res = await axios.post(`${BASE_URL}/data`, { string });
-    // console.log('res is ', res);
+
     return res;
   } catch (err) {
-    // console.error('API Error:', err.response);
+    console.error('API Error:', err.response);
     const { message } = err.response.data.message;
     throw Array.isArray(message) ? message : [message];
   }

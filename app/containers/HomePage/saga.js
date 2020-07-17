@@ -6,6 +6,6 @@ function* getStringsAsync() {
 }
 
 export default function* rootSaga() {
-  console.log('running rootSaga()');
+  console.log('running HomePage rootSaga()');
   yield takeEvery('GET_STRINGS', getStringsAsync);
 }
