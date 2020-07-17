@@ -26,6 +26,7 @@ function AddString() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+
     prependString(clientString);
     setClientString('');
     history.push('/');
