@@ -1,8 +1,10 @@
 import { put, takeEvery } from 'redux-saga/effects';
+import { getAllStrings } from '../../ApiCalls';
 
-function* getStringsAsync() {
-  console.log('running getStringAsync()');
-  yield put({ type: 'GET_STRINGS_ASYNC' });
+export function* getStringsAsync() {
+  console.log('running getStringsAsync()');
+  const strings = yield getAllStrings();
+  yield put({ strings }); // TODO put takes an action
 }
 
 export default function* rootSaga() {

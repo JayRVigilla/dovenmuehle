@@ -53,7 +53,7 @@ function HomePage() {
           if (stringList === null) setStringList(strings);
           setMadeReq(true);
         } catch (err) {
-          console.error(err);
+          // console.error(err);
         }
       }
       // dispatch({ type: 'GET_STRINGS' });
