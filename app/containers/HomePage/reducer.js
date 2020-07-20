@@ -5,6 +5,7 @@
  */
 
 /* eslint-disable default-case, no-param-reassign */
+// import { getAllStrings } from '../../ApiCalls';
 const INITIAL_STATE = { strings: [] };
 
 const reducer = (state = INITIAL_STATE, action) => {

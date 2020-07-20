@@ -9,25 +9,17 @@
 import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
-// import { useStore } from 'react-redux';
 import uuid from 'uuid';
 import injectSaga from 'utils/injectSaga';
 import { DAEMON } from 'utils/constants';
-// import rootSaga from './saga';
 import saga from './saga';
 import messages from './messages';
 import StringList from './StringList';
 import { getAllStrings } from '../../ApiCalls';
 
 function HomePage() {
-  // const mapStateToProps = state => ({
-  //   string: state.string,
-  // });
+  // const withSaga = useInjectSaga(key, saga);
 
-  // const mapDispatchToProps = dispatch => {
-  //   onAddString: str => dispatch({ type: 'ADD_STRING', value: str }),
-  //   onGetStrings: () => dispatch({ type: 'FETCH_STRINGS', value: '' })
-  // };
   const [stringList, setStringList] = useState(null);
   const [madeReq, setMadeReq] = useState(false);
 
