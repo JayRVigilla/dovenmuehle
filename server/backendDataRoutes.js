@@ -9,8 +9,8 @@ const server = new BackendData();
 
 router.get('/', async (req, res, next) => {
   try {
-    const response = server.fetch();
-    return res.status(200).json({ response });
+    const strings = server.fetch();
+    return res.status(200).json({ strings });
   } catch (err) {
     return next(err);
   }

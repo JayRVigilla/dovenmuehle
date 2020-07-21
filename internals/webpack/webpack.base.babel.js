@@ -121,6 +121,12 @@ module.exports = options => ({
     mainFields: ['browser', 'jsnext:main', 'main'],
   },
   devtool: options.devtool,
+  /** ERROR in ./node_modules/schema-utils/src/validateOptions.js
+   Module not found: Error: Can't resolve 'fs'
+   found a fix @ GitHub repo for react-boilerplate in Issues
+   Module not found: Error: Can't resolve 'fs'#2279
+   */
+  node: { fs: 'empty' },
   target: 'web', // Make web variables accessible to webpack, e.g. window
   performance: options.performance || {},
 });

@@ -3,10 +3,11 @@ const BASE_URL = 'http://localhost:3000';
 
 async function getAllStrings() {
   try {
+    // console.log('GET from ApiCalls');
     const response = await axios.get(`${BASE_URL}/data`);
     return response;
   } catch (err) {
-    console.error('API Error:', err.response);
+    // console.error('API Error:', err.response);
     const { message } = err.response.data.message;
     throw Array.isArray(message) ? message : [message];
   }
@@ -18,7 +19,7 @@ async function prependString(string) {
 
     return res;
   } catch (err) {
-    console.error('API Error:', err.response);
+    // console.error('API Error:', err.response);
     const { message } = err.response.data.message;
     throw Array.isArray(message) ? message : [message];
   }
