@@ -10,11 +10,11 @@ function* getStringsAsync() {
 
   // const strings = yield getAllStrings();
   const { strings } = yield call(request, backendURL);
-  // console.log(strings);
+  console.log(strings);
   yield put(storeStrings(strings));
 }
 
-export function* watchGetStrings() {
+export function* homePageReducer() {
   // console.log('running HomePage rootSaga()');
   yield takeLatest('GET_STRINGS', getStringsAsync);
 }

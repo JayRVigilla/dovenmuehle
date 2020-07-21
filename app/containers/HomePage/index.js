@@ -14,13 +14,13 @@ import uuid from 'uuid';
 import injectSaga from 'utils/injectSaga';
 // import { DAEMON } from 'utils/constants';
 import useInjectReducer from 'utils/injectReducer';
-import { watchGetStrings } from './saga';
+import saga from './saga';
 import messages from './messages';
 import StringList from './StringList';
 // import { getAllStrings } from '../../ApiCalls';
 import reducer from './reducer';
 
-// ...
+const key = 'homePage';
 
 export function mapDispatchToProps(dispatch) {
   return {
@@ -35,11 +35,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = useInjectReducer({ key: 'HomePage', reducer });
+const withReducer = useInjectReducer({ key, reducer });
 
 const withSaga = injectSaga({
-  key: 'HomePage',
-  saga: watchGetStrings,
+  key,
+  saga,
 });
 
 export default compose(
@@ -47,12 +47,9 @@ export default compose(
   withSaga,
   withConnect,
 )(function HomePage({ onGetStrings }) {
-  // const withSaga = useInjectSaga(key, saga);
   const [stringList, setStringList] = useState(null);
   const [madeReq, setMadeReq] = useState(false);
 
-  // const dispatch = useDispatch();
-  // const store = useStore();
   useEffect(function renderStringList() {
     function addUniqueIds(array) {
       const newArray = array.map(val => {
@@ -98,5 +95,3 @@ export default compose(
     </div>
   );
 });
-
-// export default HomePage;
