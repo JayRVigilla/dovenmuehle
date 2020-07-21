@@ -24,10 +24,11 @@ function HomePage() {
   //   string: state.string,
   // });
 
-  // const mapDispatchToProps = dispatch => {
+  // const mapDispatchToProps = dispatch => ({
+  //   onGetStrings: () => dispatch({ type: 'FETCH_STRINGS', value: '' }),
   //   onAddString: str => dispatch({ type: 'ADD_STRING', value: str }),
-  //   onGetStrings: () => dispatch({ type: 'FETCH_STRINGS', value: '' })
-  // };
+  // });
+
   const [stringList, setStringList] = useState(null);
   const [madeReq, setMadeReq] = useState(false);
 
