@@ -20,14 +20,14 @@ import reducer from './reducer';
 import { getStringsArray } from '../App/actions';
 import {
   makeSelectStrings,
-  makeSelectMadeReq,
+  makeSelectIsLoading,
   makeSelectErr,
 } from './selectors';
 
 const key = 'homePage';
 
 const mapStateToProps = createStructuredSelector({
-  madeReq: makeSelectMadeReq(),
+  isLoading: makeSelectIsLoading(),
   err: makeSelectErr(),
   strings: makeSelectStrings(),
 });
@@ -48,7 +48,7 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(function HomePage({ dispatchGetStrings, strings, madeReq }) {
+)(function HomePage({ dispatchGetStrings, strings, isLoading }) {
   useEffect(() => dispatchGetStrings(), []);
   console.log('strings from homepage', strings);
 
@@ -64,7 +64,7 @@ export default compose(
       </div>
 
       <div>
-        <StringList stringList={strings} madeReq={madeReq} />
+        <StringList stringList={strings} isLoading={isLoading} />
       </div>
     </div>
   );

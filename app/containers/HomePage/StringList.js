@@ -7,37 +7,41 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { useSelector } from 'react-redux';
-// import { getAllStrings } from '../../ApiCalls';
 
-function StringList({ stringList, madeReq }) {
+function StringList({ stringList, isLoading, err }) {
   StringList.propTypes = {
     stringList: PropTypes.array,
   };
+
+  const mapStrings = arr => arr.map(str => <li key={str.key}>{str.val}</li>);
+
   console.log('stringList', stringList);
   function renderedList(arr) {
-    if (arr === undefined) {
+    if (err) {
       return (
         <div>
-          <p>Array passed to component is undefined</p>
+          <p>{err.messsage}</p>
         </div>
       );
     }
 
-    if (arr.length === 0) {
+    if (arr) {
+      if (arr.length === 0) {
+        return (
+          <div>
+            <p>No strings in list</p>
+          </div>
+        );
+      }
       return (
         <div>
-          <p>No strings in list</p>
+          <ul>{mapStrings(arr)}</ul>
         </div>
       );
     }
     return (
       <div>
-        <ul>
-          {arr.map(str => (
-            <li key={str.key}>{str.val}</li>
-          ))}
-        </ul>
+        <p> String Array is not an Array :/ </p>
       </div>
     );
   }
@@ -50,7 +54,7 @@ function StringList({ stringList, madeReq }) {
     );
   }
 
-  return madeReq === false ? loadingMessage() : renderedList(stringList);
+  return isLoading === true ? loadingMessage() : renderedList(stringList);
 }
 
 export default StringList;

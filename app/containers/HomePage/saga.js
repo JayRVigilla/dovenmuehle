@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 import { call } from 'file-loader';
 import { storeStrings, errorStrings } from '../App/actions';
-import { GET_STRINGS } from '../../constants';
+import { GET_STRINGS } from './constants';
 
 export function* getStringsFromAPI() {
   console.log('running getStringsFromAPI()');
