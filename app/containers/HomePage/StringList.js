@@ -14,7 +14,7 @@ function StringList({ stringList, madeReq }) {
   StringList.propTypes = {
     stringList: PropTypes.array,
   };
-
+  console.log('stringList', stringList);
   function renderedList(arr) {
     if (arr === undefined) {
       return (

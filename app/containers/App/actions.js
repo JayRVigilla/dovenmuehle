@@ -1,12 +1,4 @@
-// import { getAllStrings } from '../../ApiCalls';
 import { GET_STRINGS, STORE_STRINGS, GET_STRINGS_ERR } from './constants';
-
-// export function fetchStrings() {
-//   return async dispatch => {
-//     const response = getAllStrings();
-//     return dispatch(getStringsArray(response.data));
-//   };
-// }
 
 export function getStringsArray() {
   return {

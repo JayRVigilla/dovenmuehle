@@ -12,15 +12,25 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import injectSaga from 'utils/injectSaga';
 import useInjectReducer from 'utils/injectReducer';
+import { createStructuredSelector } from 'reselect';
 import saga from './saga';
 import messages from './messages';
 import StringList from './StringList';
 import reducer from './reducer';
 import { getStringsArray } from '../App/actions';
+import {
+  makeSelectStrings,
+  makeSelectMadeReq,
+  makeSelectErr,
+} from './selectors';
 
 const key = 'homePage';
 
-const mapStateToProps = state => ({ strings: state.strings });
+const mapStateToProps = createStructuredSelector({
+  madeReq: makeSelectMadeReq(),
+  err: makeSelectErr(),
+  strings: makeSelectStrings(),
+});
 
 const withConnect = connect(
   mapStateToProps,
@@ -40,6 +50,7 @@ export default compose(
   withConnect,
 )(function HomePage({ dispatchGetStrings, strings, madeReq }) {
   useEffect(() => dispatchGetStrings(), []);
+  console.log('strings from homepage', strings);
 
   return (
     <div>
