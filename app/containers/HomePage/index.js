@@ -17,7 +17,7 @@ import saga from './saga';
 import messages from './messages';
 import StringList from './StringList';
 import reducer from './reducer';
-import { getStringsArray } from '../App/actions';
+import { getStringsArray } from './actions';
 import {
   makeSelectStrings,
   makeSelectIsLoading,
