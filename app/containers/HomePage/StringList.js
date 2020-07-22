@@ -16,6 +16,14 @@ function StringList({ stringList, madeReq }) {
   };
 
   function renderedList(arr) {
+    if (arr === undefined) {
+      return (
+        <div>
+          <p>Array passed to component is undefined</p>
+        </div>
+      );
+    }
+
     if (arr.length === 0) {
       return (
         <div>

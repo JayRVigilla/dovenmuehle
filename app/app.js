@@ -32,14 +32,14 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
-import { watchGetStrings } from './containers/HomePage/saga';
+import saga from './containers/HomePage/saga';
 
 // Create redux store with history
-const initialState = { strings: [] };
+const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
-store.runSaga(watchGetStrings);
+store.runSaga(saga);
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
