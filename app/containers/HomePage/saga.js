@@ -3,7 +3,7 @@ import request from 'utils/request';
 import { storeStrings, errorStrings } from './actions';
 import { GET_STRINGS } from './constants';
 
-function* getStringsFromAPI() {
+export function* getStringsFromAPI() {
   console.log('running getStringsFromAPI()');
   const backendURL = 'http://localhost:3000/data';
 

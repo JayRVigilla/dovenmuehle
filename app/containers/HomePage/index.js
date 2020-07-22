@@ -64,6 +64,7 @@ export default compose(
       </div>
 
       <div>
+        {/* {TODO: try using List in Components folder} */}
         <StringList stringList={strings} isLoading={isLoading} />
       </div>
     </div>

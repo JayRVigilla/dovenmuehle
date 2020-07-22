@@ -25,7 +25,7 @@ function StringList({ stringList, isLoading, err }) {
       );
     }
 
-    if (arr) {
+    if (Array.isArray(arr) === true) {
       if (arr.length === 0) {
         return (
           <div>
