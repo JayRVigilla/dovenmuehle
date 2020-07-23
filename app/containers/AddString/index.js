@@ -94,11 +94,9 @@ export default compose(
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onUpdateClientString: evt => {
-      dispatch(updateClientString(evt.target.value));
-    },
+    onUpdateClientString: evt => dispatch(updateClientString(evt.target.value)),
     onSubmit: evt => {
-      evt.preventDefault();
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(postString());
       dispatch(updateClientString(''));
     },

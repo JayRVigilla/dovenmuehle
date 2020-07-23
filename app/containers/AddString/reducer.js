@@ -7,14 +7,16 @@
 /* eslint-disable default-case, no-param-reassign */
 import produce from 'immer';
 import {
-  CLIENT_STRING,
   POST_STRING,
   PREPENDED_STRING,
   POST_STRING_ERR,
+  UPDATE_CLIENT_STRING,
 } from './constants';
 
 export const INITIAL_STATE = {
-  clientString: '',
+  data: {
+    clientString: '',
+  },
   err: false,
   prepended: false,
   isLoading: false,
@@ -23,8 +25,8 @@ export const INITIAL_STATE = {
 const addStringReducer = (state = INITIAL_STATE, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case CLIENT_STRING:
-        draft.clientString = action.clientString;
+      case UPDATE_CLIENT_STRING:
+        draft.data.clientString = action.clientString;
         break;
 
       case POST_STRING:
