@@ -5,6 +5,8 @@ import { IntlProvider } from 'react-intl';
 import HomePage from '../index';
 
 describe('<HomePage />', () => {
+  beforeAll(() => {});
+
   it('should render and match the snapshot', () => {
     const {
       container: { firstChild },
@@ -14,5 +16,13 @@ describe('<HomePage />', () => {
       </IntlProvider>,
     );
     expect(firstChild).toMatchSnapshot();
+  });
+
+  it('should fetch strings from backend on mount', () => {
+    expect().toSomething();
+  });
+
+  it('', () => {
+    expect().toSomething();
   });
 });
