@@ -1,4 +1,4 @@
-import { GET_STRINGS, STORE_STRINGS, GET_STRINGS_ERR } from '../App/constants';
+import { GET_STRINGS, STORE_STRINGS, GET_STRINGS_ERR } from './constants';
 
 export function getStringsArray() {
   return {
