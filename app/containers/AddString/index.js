@@ -16,13 +16,12 @@ import { createStructuredSelector } from 'reselect';
 import saga from './saga';
 import messages from './messages';
 // import LoadingIndicator from '../../components/LoadingIndicator';
-
 import {
   makeSelectClientString,
   makeSelectIsLoading,
   makeSelectErr,
 } from './selectors';
-import { postString, updateClientString } from './actions';
+import { postString, updateClientString, postSringsError } from './actions';
 import reducer from './reducer';
 
 const key = 'addString';
@@ -67,11 +66,15 @@ export default compose(
       </h1>
 
       <div>
-        <p>Welcome to the Stacker!</p>
-        <p>
-          Enter your string and click Submit to add a new string to the top of
-          the stack.
-        </p>
+        <h2>
+          <FormattedMessage {...messages.subHead} />
+        </h2>
+        <p>To add a event towards the beginning of the story:</p>
+        <ul>
+          <li>Enter your plot point</li>
+          <li>Click Submit</li>
+        </ul>
+        <a href="/">See your mystery</a>
       </div>
 
       <div>
@@ -95,9 +98,18 @@ export function mapDispatchToProps(dispatch) {
   return {
     onUpdateClientString: evt => dispatch(updateClientString(evt.target.value)),
     onSubmit: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(postString());
-      dispatch(updateClientString(''));
+      if (
+        evt !== undefined &&
+        evt.preventDefault &&
+        // regex checks if at least one character is not whitespace
+        // pulled from https://stackoverflow.com/questions/2249460/how-to-use-javascript-regex-to-check-for-empty-form-fields
+        /([^\s])/.test(evt.target.value)
+      ) {
+        evt.preventDefault();
+        dispatch(postString());
+        dispatch(updateClientString(''));
+      }
+      dispatch(postSringsError());
     },
   };
 }

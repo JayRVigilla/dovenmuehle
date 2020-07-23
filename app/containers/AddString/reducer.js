@@ -14,9 +14,7 @@ import {
 } from './constants';
 
 export const INITIAL_STATE = {
-  data: {
-    clientString: '',
-  },
+  clientString: '',
   err: false,
   prepended: false,
   isLoading: false,
@@ -26,7 +24,7 @@ const addStringReducer = (state = INITIAL_STATE, action) =>
   produce(state, draft => {
     switch (action.type) {
       case UPDATE_CLIENT_STRING:
-        draft.data.clientString = action.clientString;
+        draft.clientString = action.clientString;
         break;
 
       case POST_STRING:

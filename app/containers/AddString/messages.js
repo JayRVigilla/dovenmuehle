@@ -10,6 +10,10 @@ export const scope = 'app.containers.HomePage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Add to the String Stack',
+    defaultMessage: 'Add to your mystery plot line',
+  },
+  subHead: {
+    id: `${scope}.subHead`,
+    defaultMessage: 'Welcome to the Prepender',
   },
 });

@@ -84,8 +84,13 @@ export default compose(
       </h1>
 
       <div>
-        <p>Want to add more strings?</p>
-        <a href="/add">Click Here</a>
+        <p>
+          Every good mystery writer knows the secret to success is to work
+          backwards. Read your mystery here.
+        </p>
+        <a href="/add">
+          Click Here to add towards the beginning of your mystery
+        </a>
       </div>
 
       <div>{isLoading ? <LoadingIndicator /> : renderedList(strings)}</div>
