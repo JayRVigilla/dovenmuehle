@@ -52,8 +52,7 @@ export default compose(
 )(function AddString({
   clientString,
   // isLoading,
-  // prepended,
-  // dispatchPostString,
+  // prepended, if false then pop up message "cannot be all whitespace"
   onSubmit,
   onUpdateClientString,
 }) {

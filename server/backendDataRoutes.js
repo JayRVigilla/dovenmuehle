@@ -23,8 +23,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   try {
-    server.post(req.body.string);
-    return res.status(201).send({ prepended: true });
+    const prepended = server.post(req.body.string);
+    return res.status(201).send({ prepended });
   } catch (err) {
     return next(err);
   }

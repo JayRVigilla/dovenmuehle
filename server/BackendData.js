@@ -8,11 +8,13 @@ class BackendData {
 
   post(str) {
     // regex checks if at least one character is not whitespace
-    // pulled from https://stackoverflow.com/questions/2031085/how-can-i-check-if-string-contains-characters-whitespace-not-just-whitespace
-    if (str && /\S/.test(str)) {
+    // pulled from https://stackoverflow.com/questions/2249460/how-to-use-javascript-regex-to-check-for-empty-form-fields
+    // console.log('str in backend: ', str);
+    if (/([^\s])/.test(str)) {
       database.unshift(str);
+      return true;
     }
-    return database;
+    return false;
   }
 }
 

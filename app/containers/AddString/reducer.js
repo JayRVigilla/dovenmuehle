@@ -35,7 +35,7 @@ const addStringReducer = (state = INITIAL_STATE, action) =>
 
       case PREPENDED_STRING:
         draft.isLoading = false;
-        draft.prepended = true;
+        draft.prepended = action.prepended;
         break;
 
       case POST_STRING_ERR:

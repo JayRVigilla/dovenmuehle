@@ -9,7 +9,7 @@ function* addStringToAPI() {
   const backendURL = 'http://localhost:3000/data';
   const string = yield select(makeSelectClientString());
   const options = {
-    method: POST_STRING,
+    method: 'post',
     headers: {
       'Content-Type': 'application/json',
     },
