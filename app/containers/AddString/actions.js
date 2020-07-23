@@ -15,7 +15,7 @@
 // }
 
 import {
-  CLIENT_STRING,
+  UPDATE_CLIENT_STRING,
   POST_STRING,
   PREPENDED_STRING,
   POST_STRING_ERR,
@@ -30,7 +30,7 @@ export function postString(clientString) {
 
 export function updateClientString(clientString) {
   return {
-    type: CLIENT_STRING,
+    type: UPDATE_CLIENT_STRING,
     clientString,
   };
 }

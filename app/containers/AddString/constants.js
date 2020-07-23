@@ -12,4 +12,4 @@
 export const POST_STRING = 'dovenmuehle/AddString/POST_STRING';
 export const PREPENDED_STRING = 'dovenmuehle/AddString/PREPENDED_STRINGS';
 export const POST_STRING_ERR = 'dovenmuehle/AddString/POST_STRINGS_ERR';
-export const CLIENT_STRING = 'dovenmuehle/AddString/CLIENT_STRING';
+export const UPDATE_CLIENT_STRING = 'dovenmuehle/AddString/CLIENT_STRING';

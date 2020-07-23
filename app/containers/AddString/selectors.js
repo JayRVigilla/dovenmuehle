@@ -21,9 +21,16 @@ const makeSelectErr = () =>
     addStringState => addStringState.err,
   );
 
+const makeSelectPrepended = () =>
+  createSelector(
+    selectAddString,
+    addStringState => addStringState.preppended,
+  );
+
 export {
   selectAddString,
   makeSelectClientString,
   makeSelectIsLoading,
   makeSelectErr,
+  makeSelectPrepended,
 };

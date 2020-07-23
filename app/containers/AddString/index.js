@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -22,7 +22,7 @@ import {
   makeSelectIsLoading,
   makeSelectErr,
 } from './selectors';
-import postString from './actions';
+import { postString, updateClientString } from './actions';
 import reducer from './reducer';
 
 const key = 'addString';
@@ -52,28 +52,14 @@ export default compose(
 )(function AddString({
   clientString,
   // isLoading,
-  prepended,
-  dispatchPostString,
+  // prepended,
+  // dispatchPostString,
+  onSubmit,
+  onUpdateClientString,
 }) {
-  const history = useHistory();
+  // const history = useHistory();
 
   // use effect
-
-  // becomes prop
-  // const [clientString, setClientString] = useState('');
-
-  // becomes a dispatch to prop
-  const handleChange = () => {
-    // setClientString(evt.target.value);
-  };
-
-  // becomes a dispatch to prop
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    dispatchPostString(clientString);
-    // setClientString('');
-    if (prepended) history.push('/');
-  };
 
   return (
     <div>
@@ -90,9 +76,14 @@ export default compose(
       </div>
 
       <div>
-        <form method="POST" onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <label htmlFor="clientString">
-            <input name="clientString" onChange={handleChange} />
+            <input
+              id="clientString"
+              type="text"
+              value={clientString}
+              onChange={onUpdateClientString}
+            />
           </label>
           <button type="submit">Submit</button>
         </form>
@@ -103,6 +94,13 @@ export default compose(
 
 export function mapDispatchToProps(dispatch) {
   return {
-    dispatchPostString: () => dispatch(postString()),
+    onUpdateClientString: evt => {
+      dispatch(updateClientString(evt.target.value));
+    },
+    onSubmit: evt => {
+      evt.preventDefault();
+      dispatch(postString());
+      dispatch(updateClientString(''));
+    },
   };
 }
