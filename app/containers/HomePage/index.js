@@ -73,11 +73,6 @@ export default compose(
 
 export function mapDispatchToProps(dispatch) {
   return {
-    dispatchGetStrings: evt => {
-      if (evt !== undefined && evt.preventDefault) {
-        evt.preventDefault();
-        dispatch(getStringsArray);
-      }
-    },
+    dispatchGetStrings: () => dispatch(getStringsArray()),
   };
 }
