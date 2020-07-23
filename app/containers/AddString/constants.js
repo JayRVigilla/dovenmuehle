@@ -10,6 +10,6 @@
  */
 
 export const POST_STRING = 'dovenmuehle/AddString/POST_STRING';
-export const STORE_STRING = 'dovenmuehle/AddString/STORE_STRINGS';
-export const POST_STRINGS_ERR = 'dovenmuehle/AddString/POST_STRINGS_ERR';
-export const FORM_STRING = 'dovenmuehle/AddString/FORM_STRING';
+export const PREPENDED_STRING = 'dovenmuehle/AddString/PREPENDED_STRINGS';
+export const POST_STRING_ERR = 'dovenmuehle/AddString/POST_STRINGS_ERR';
+export const CLIENT_STRING = 'dovenmuehle/AddString/CLIENT_STRING';

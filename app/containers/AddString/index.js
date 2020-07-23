@@ -5,40 +5,74 @@
  *
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import injectSaga from 'utils/injectSaga';
-// import useInjectReducer from 'utils/injectReducer';
-// import { createStructuredSelector } from 'reselect';
-import { DAEMON } from 'utils/constants';
+import useInjectReducer from 'utils/injectReducer';
+import { createStructuredSelector } from 'reselect';
 import saga from './saga';
 import messages from './messages';
 // import LoadingIndicator from '../../components/LoadingIndicator';
-import { prependString } from '../../ApiCalls';
-import {} from './selectors';
 
-function AddString() {
+import {
+  makeSelectClientString,
+  makeSelectIsLoading,
+  makeSelectErr,
+} from './selectors';
+import postString from './actions';
+import reducer from './reducer';
+
+const key = 'addString';
+
+const mapStateToProps = createStructuredSelector({
+  clientString: makeSelectClientString(),
+  isLoading: makeSelectIsLoading(),
+  err: makeSelectErr(),
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = useInjectReducer({ key, reducer });
+
+const withSaga = injectSaga({
+  key,
+  saga,
+});
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(function AddString({
+  clientString,
+  // isLoading,
+  prepended,
+  dispatchPostString,
+}) {
   const history = useHistory();
 
   // use effect
 
   // becomes prop
-  const [clientString, setClientString] = useState('');
+  // const [clientString, setClientString] = useState('');
 
   // becomes a dispatch to prop
-  const handleChange = evt => {
-    setClientString(evt.target.value);
+  const handleChange = () => {
+    // setClientString(evt.target.value);
   };
 
   // becomes a dispatch to prop
   const handleSubmit = evt => {
     evt.preventDefault();
-    prependString(clientString);
-    setClientString('');
-    history.push('/');
+    dispatchPostString(clientString);
+    // setClientString('');
+    if (prepended) history.push('/');
   };
 
   return (
@@ -65,8 +99,10 @@ function AddString() {
       </div>
     </div>
   );
-}
-const withSaga = injectSaga({ key: 'addstring', saga, mode: DAEMON });
+});
 
-export default compose(withSaga)(AddString);
-// export default AddString;
+export function mapDispatchToProps(dispatch) {
+  return {
+    dispatchPostString: () => dispatch(postString()),
+  };
+}

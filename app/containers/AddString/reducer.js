@@ -7,10 +7,10 @@
 /* eslint-disable default-case, no-param-reassign */
 import produce from 'immer';
 import {
-  FORM_STRING,
+  CLIENT_STRING,
   POST_STRING,
-  POST_STRINGS_ERR,
-  STORE_STRING,
+  PREPENDED_STRING,
+  POST_STRING_ERR,
 } from './constants';
 
 export const INITIAL_STATE = {
@@ -23,7 +23,7 @@ export const INITIAL_STATE = {
 const addStringReducer = (state = INITIAL_STATE, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FORM_STRING:
+      case CLIENT_STRING:
         draft.clientString = action.clientString;
         break;
 
@@ -31,13 +31,13 @@ const addStringReducer = (state = INITIAL_STATE, action) =>
         draft.isLoading = true;
         break;
 
-      case STORE_STRING:
-        draft.prepended = true;
+      case PREPENDED_STRING:
         draft.isLoading = false;
+        draft.prepended = true;
         break;
 
-      case POST_STRINGS_ERR:
-        draft.something = true;
+      case POST_STRING_ERR:
+        draft.prepended = false;
         draft.err = action.err;
         break;
     }
