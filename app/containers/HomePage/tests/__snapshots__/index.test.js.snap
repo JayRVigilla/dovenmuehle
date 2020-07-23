@@ -1,9 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
-<h1>
-  <span>
-    This is the HomePage container!
-  </span>
-</h1>
+<div>
+  <h1>
+    <span>
+      Write your mystery plot line
+    </span>
+  </h1>
+  <div>
+    <p>
+      Every good mystery writer knows the secret to success is to work backwards. Read your mystery here.
+    </p>
+    <a
+      href="/add"
+    >
+      Click Here to add towards the beginning of your mystery
+    </a>
+  </div>
+  <div>
+    <div>
+      <p>
+        Something happened
+      </p>
+      <p>
+        fetch is not defined
+      </p>
+    </div>
+  </div>
+</div>
 `;

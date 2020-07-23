@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddString /> should render and match the snapshot 1`] = `
+<div>
+  <h1>
+    <span>
+      Add to your mystery plot line
+    </span>
+  </h1>
+  <div>
+    <h2>
+      <span>
+        Welcome to the Prepender
+      </span>
+    </h2>
+    <p>
+      To add a event towards the beginning of the story:
+    </p>
+    <ul>
+      <li>
+        Enter your plot point
+      </li>
+      <li>
+        Click Submit
+      </li>
+    </ul>
+    <a
+      href="/"
+    >
+      See your mystery
+    </a>
+  </div>
+  <div>
+    <form>
+      <label
+        for="clientString"
+      >
+        <input
+          id="clientString"
+          type="text"
+          value=""
+        />
+      </label>
+      <button
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;

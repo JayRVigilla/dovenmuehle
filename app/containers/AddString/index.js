@@ -55,9 +55,7 @@ export default compose(
   onSubmit,
   onUpdateClientString,
 }) {
-  // const history = useHistory();
-
-  // use effect
+  // use effect?
 
   return (
     <div>

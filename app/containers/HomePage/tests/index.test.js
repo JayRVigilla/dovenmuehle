@@ -1,28 +1,32 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
+import { browserHistory } from 'react-router-dom';
+import configureStore from '../../../configureStore';
 
 import HomePage from '../index';
 
 describe('<HomePage />', () => {
-  beforeAll(() => {});
+  let store;
+  beforeAll(() => {
+    store = configureStore({}, browserHistory);
+  });
 
   it('should render and match the snapshot', () => {
     const {
       container: { firstChild },
     } = render(
-      <IntlProvider locale="en">
-        <HomePage />
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale="en">
+          <HomePage />
+        </IntlProvider>
+      </Provider>,
     );
     expect(firstChild).toMatchSnapshot();
   });
 
-  it('should fetch strings from backend on mount', () => {
-    expect().toSomething();
-  });
+  it('should fetch strings from backend on mount', () => {});
 
-  it('', () => {
-    expect().toSomething();
-  });
+  it('', () => {});
 });
