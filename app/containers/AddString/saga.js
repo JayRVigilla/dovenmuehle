@@ -5,7 +5,7 @@ import { POST_STRING } from './constants';
 import { postSringsError, prependedString } from './actions';
 import { makeSelectClientString } from './selectors';
 
-function* addStringToAPI() {
+export function* addStringToAPI() {
   const backendURL = 'http://localhost:3000/data';
   const string = yield select(makeSelectClientString());
   const options = {

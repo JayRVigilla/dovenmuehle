@@ -2,7 +2,6 @@
  * AddString
  *
  * form that allows client to add to txt file in backend
- *
  */
 
 import React from 'react';
@@ -15,7 +14,8 @@ import useInjectReducer from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import saga from './saga';
 import messages from './messages';
-// import LoadingIndicator from '../../components/LoadingIndicator';
+import CenteredSection from './CenteredSection';
+import A from '../../components/A';
 import {
   makeSelectClientString,
   makeSelectIsLoading,
@@ -48,47 +48,45 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(function AddString({
-  clientString,
-  // isLoading,
-  // prepended, if false then pop up message "cannot be all whitespace"
-  onSubmit,
-  onUpdateClientString,
-}) {
-  // use effect?
+)(function AddString({ clientString, onSubmit, onUpdateClientString }) {
+  const noBullets = { 'list-style-type': 'none' };
 
   return (
-    <div>
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
-
+    <CenteredSection>
       <div>
-        <h2>
-          <FormattedMessage {...messages.subHead} />
-        </h2>
-        <p>To add a event towards the beginning of the story:</p>
-        <ul>
-          <li>Enter your plot point</li>
-          <li>Click Submit</li>
-        </ul>
-        <a href="/">See your mystery</a>
-      </div>
+        <h1>
+          <FormattedMessage {...messages.header} />
+        </h1>
 
-      <div>
-        <form onSubmit={onSubmit}>
-          <label htmlFor="clientString">
-            <input
-              id="clientString"
-              type="text"
-              value={clientString}
-              onChange={onUpdateClientString}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <div>
+          <h2>
+            <FormattedMessage {...messages.subHead} />
+          </h2>
+          <p>To add a event towards the beginning of the story:</p>
+          <ul style={noBullets}>
+            <li>Enter your plot point</li>
+            <li>Click Submit</li>
+          </ul>
+        </div>
+
+        <div>
+          <form onSubmit={onSubmit}>
+            <label htmlFor="clientString">
+              <input
+                id="clientString"
+                type="text"
+                value={clientString}
+                onChange={onUpdateClientString}
+              />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <br />
+        <br />
+        <A href="/">See your mystery so far...</A>
       </div>
-    </div>
+    </CenteredSection>
   );
 });
 
