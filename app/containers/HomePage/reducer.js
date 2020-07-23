@@ -5,7 +5,6 @@
  */
 
 /* eslint-disable default-case, no-param-reassign */
-// import { getAllStrings } from '../../ApiCalls';
 import produce from 'immer';
 import { GET_STRINGS, STORE_STRINGS, GET_STRINGS_ERR } from './constants';
 
@@ -31,7 +30,7 @@ const homePageReducer = (state = INITIAL_STATE, action) =>
 
       case GET_STRINGS_ERR:
         draft.isLoading = false;
-        draft.err = true;
+        draft.err = action.err;
         break;
     }
   });

@@ -18,7 +18,6 @@ import messages from './messages';
 import List from '../../components/List';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import ListItem from '../../components/ListItem';
-// import StringList from './StringList';
 import reducer from './reducer';
 import { getStringsArray } from './actions';
 import {
@@ -51,11 +50,19 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(function HomePage({ dispatchGetStrings, strings, isLoading }) {
+)(function HomePage({ dispatchGetStrings, strings, isLoading, err }) {
   useEffect(() => dispatchGetStrings(), []);
-  // console.log('strings from homepage', strings);
 
   function renderedList(stringsState) {
+    if (err) {
+      return (
+        <div>
+          <p>Something happened</p>
+          <p>{err.message}</p>
+        </div>
+      );
+    }
+
     if (Array.isArray(stringsState)) {
       if (stringsState.length === 0) {
         return (
@@ -66,11 +73,8 @@ export default compose(
       }
       return <List items={stringsState} component={ListItem} />;
     }
-    return (
-      <div>
-        <p> String Array not an Array :/ </p>
-      </div>
-    );
+
+    return <LoadingIndicator />;
   }
 
   return (
@@ -84,11 +88,7 @@ export default compose(
         <a href="/add">Click Here</a>
       </div>
 
-      <div>
-        {/* {TODO: try using List in Components folder} */}
-        {/* <StringList stringList={strings} isLoading={isLoading} /> */}
-        {isLoading ? <LoadingIndicator /> : renderedList(strings)}
-      </div>
+      <div>{isLoading ? <LoadingIndicator /> : renderedList(strings)}</div>
     </div>
   );
 });

@@ -1,3 +1,3 @@
-global.strings = ['test string', 'booboobutt'];
+global.strings = [];
 
 module.exports = global.strings;

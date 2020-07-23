@@ -5,16 +5,42 @@
  */
 
 /* eslint-disable default-case, no-param-reassign */
-const INITIAL_STATE = { strings: [] };
+import produce from 'immer';
+import {
+  FORM_STRING,
+  POST_STRING,
+  POST_STRINGS_ERR,
+  STORE_STRING,
+} from './constants';
 
-const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case 'ADD_STRING':
-      return { ...state, strings: [action.payload, ...state.strings] };
-    default:
-      return state;
-  }
+export const INITIAL_STATE = {
+  clientString: '',
+  err: false,
+  prepended: false,
+  isLoading: false,
 };
-// end
 
-export default reducer;
+const addStringReducer = (state = INITIAL_STATE, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case FORM_STRING:
+        draft.clientString = action.clientString;
+        break;
+
+      case POST_STRING:
+        draft.isLoading = true;
+        break;
+
+      case STORE_STRING:
+        draft.prepended = true;
+        draft.isLoading = false;
+        break;
+
+      case POST_STRINGS_ERR:
+        draft.something = true;
+        draft.err = action.err;
+        break;
+    }
+  });
+
+export default addStringReducer;
