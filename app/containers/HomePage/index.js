@@ -51,7 +51,9 @@ export default compose(
   withSaga,
   withConnect,
 )(function HomePage({ dispatchGetStrings, strings, isLoading, err }) {
-  useEffect(() => dispatchGetStrings(), []);
+  useEffect(() => {
+    dispatchGetStrings();
+  }, []);
 
   function renderedList(stringsState) {
     if (err) {

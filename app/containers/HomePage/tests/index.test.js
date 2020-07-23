@@ -25,8 +25,4 @@ describe('<HomePage />', () => {
     );
     expect(firstChild).toMatchSnapshot();
   });
-
-  it('should fetch strings from backend on mount', () => {});
-
-  it('', () => {});
 });

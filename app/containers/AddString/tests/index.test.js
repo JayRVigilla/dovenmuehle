@@ -5,14 +5,14 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 
 import AddString, { mapDispatchToProps } from '../index';
-import { updateClientString, postString } from '../actions';
+import { updateClientString, postString, postSringsError } from '../actions';
 import configureStore from '../../../configureStore';
 
 describe('<AddString />', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore({ clientString: undefined }, browserHistory);
   });
 
   it('should render and match the snapshot', () => {
@@ -28,10 +28,11 @@ describe('<AddString />', () => {
     expect(firstChild).toMatchSnapshot();
   });
 
-  it('should should go to HomePage when link clicked', () => {
-    // trigger link click
-    expect().toSomething();
-  });
+  // it('should should go to HomePage when link clicked', () => {
+  //   // TODO trigger link click
+  //   expect().toSomething();
+  // });
+
   describe('mapDispatchtoProps', () => {
     describe('onUpdateClientstring', () => {
       it('should be injected', () => {
@@ -48,7 +49,6 @@ describe('<AddString />', () => {
         expect(dispatch).toHaveBeenCalledWith(updateClientString(testString));
       });
 
-      // will have to mock dispatches... probably
       describe('onSubmit', () => {
         it('should be injected', () => {
           const dispatch = jest.fn;
@@ -56,15 +56,24 @@ describe('<AddString />', () => {
           expect(result.onSubmit).toBeDefined();
         });
 
-        it('should dispatch onSubmit when called', () => {
+        // TODO: failing -> calling postStringsErr becasue clientString submitted is undefined
+        it('should dispatch onSubmit with postString when called with valid string', () => {
+          const dispatch = jest.fn();
+          const result = mapDispatchToProps(dispatch);
+          const validString = 'testString';
+
+          result.onSubmit();
+          expect(dispatch).toHaveBeenCalledWith(postString(validString));
+        });
+
+        it('should dispatch onSubmit with postStringError when called with empty string', () => {
+          // client string in store is undefined
           const dispatch = jest.fn();
           const result = mapDispatchToProps(dispatch);
           result.onSubmit();
-          expect(dispatch).toHaveBeenCalledWith(postString());
+          expect(dispatch).toHaveBeenCalledWith(postSringsError());
         });
       });
     });
-
-    it('', () => {});
   });
 });
