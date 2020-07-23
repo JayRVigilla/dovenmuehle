@@ -15,7 +15,10 @@ import useInjectReducer from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import saga from './saga';
 import messages from './messages';
-import StringList from './StringList';
+import List from '../../components/List';
+import LoadingIndicator from '../../components/LoadingIndicator';
+import ListItem from '../../components/ListItem';
+// import StringList from './StringList';
 import reducer from './reducer';
 import { getStringsArray } from './actions';
 import {
@@ -50,7 +53,25 @@ export default compose(
   withConnect,
 )(function HomePage({ dispatchGetStrings, strings, isLoading }) {
   useEffect(() => dispatchGetStrings(), []);
-  console.log('strings from homepage', strings);
+  // console.log('strings from homepage', strings);
+
+  function renderedList(stringsState) {
+    if (Array.isArray(stringsState)) {
+      if (stringsState.length === 0) {
+        return (
+          <div>
+            <p>No strings in list</p>
+          </div>
+        );
+      }
+      return <List items={stringsState} component={ListItem} />;
+    }
+    return (
+      <div>
+        <p> String Array not an Array :/ </p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -65,7 +86,8 @@ export default compose(
 
       <div>
         {/* {TODO: try using List in Components folder} */}
-        <StringList stringList={strings} isLoading={isLoading} />
+        {/* <StringList stringList={strings} isLoading={isLoading} /> */}
+        {isLoading ? <LoadingIndicator /> : renderedList(strings)}
       </div>
     </div>
   );
