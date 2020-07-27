@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const BackendData = require('./BackendData.js');
+const errorGen = require('./randomErrorGenerator');
 
 const server = new BackendData();
 
@@ -9,6 +10,7 @@ const server = new BackendData();
 
 router.get('/', async (req, res, next) => {
   try {
+    errorGen();
     const strings = server.fetch();
     return res.status(200).json({ strings });
   } catch (err) {
@@ -23,6 +25,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   try {
+    errorGen();
     const prepended = server.post(req.body.string);
     return res.status(201).send({ prepended });
   } catch (err) {

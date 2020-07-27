@@ -1,11 +1,11 @@
 /*
  * AddString
  *
- * form that allows client to add to txt file in backend
+ * form that allows client to POST and prepend a string to backend
+ *
  */
 
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -32,6 +32,26 @@ const mapStateToProps = createStructuredSelector({
   err: makeSelectErr(),
 });
 
+export function mapDispatchToProps(dispatch) {
+  return {
+    onUpdateClientString: evt => dispatch(updateClientString(evt.target.value)),
+    onSubmit: evt => {
+      if (
+        evt !== undefined &&
+        evt.preventDefault &&
+        // regex checks if at least one character is not whitespace
+        // pulled from https://stackoverflow.com/questions/2249460/how-to-use-javascript-regex-to-check-for-empty-form-fields
+        /([^\s])/.test(evt.target.value)
+      ) {
+        evt.preventDefault();
+        dispatch(postString());
+        dispatch(updateClientString(''));
+      }
+      dispatch(postSringsError());
+    },
+  };
+}
+
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
@@ -49,7 +69,7 @@ export default compose(
   withSaga,
   withConnect,
 )(function AddString({ clientString, onSubmit, onUpdateClientString }) {
-  const noBullets = { 'list-style-type': 'none' };
+  const listStyle = { listStyleType: 'none' };
 
   return (
     <CenteredSection>
@@ -62,11 +82,13 @@ export default compose(
           <h2>
             <FormattedMessage {...messages.subHead} />
           </h2>
-          <p>To add a event towards the beginning of the story:</p>
-          <ul style={noBullets}>
-            <li>Enter your plot point</li>
-            <li>Click Submit</li>
-          </ul>
+          <p>To add an event towards the beginning of the story:</p>
+          <div className="list-container">
+            <ul style={listStyle}>
+              <li>Enter your plot point</li>
+              <li>Click Submit</li>
+            </ul>
+          </div>
         </div>
 
         <div>
@@ -89,23 +111,3 @@ export default compose(
     </CenteredSection>
   );
 });
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    onUpdateClientString: evt => dispatch(updateClientString(evt.target.value)),
-    onSubmit: evt => {
-      if (
-        evt !== undefined &&
-        evt.preventDefault &&
-        // regex checks if at least one character is not whitespace
-        // pulled from https://stackoverflow.com/questions/2249460/how-to-use-javascript-regex-to-check-for-empty-form-fields
-        /([^\s])/.test(evt.target.value)
-      ) {
-        evt.preventDefault();
-        dispatch(postString());
-        dispatch(updateClientString(''));
-      }
-      dispatch(postSringsError());
-    },
-  };
-}

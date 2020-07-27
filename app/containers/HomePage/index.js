@@ -2,8 +2,11 @@
  * HomePage
  *
  * found at '/'
- * Holds StringList component, passes props
- * makes axios call and passes strings as prop
+ * Passes props to List Component:
+ *    props.items = stringState  // an array of strings from store
+ *    props.component = ListItem component  // styled component for list items
+ *
+ * Reselect memoizes stringState and re-renders List component if stringState has
  */
 
 import React, { useEffect } from 'react';
@@ -20,6 +23,8 @@ import List from '../../components/List';
 import A from '../../components/A';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import ListItem from '../../components/ListItem';
+import H3 from '../../components/H3';
+import IssueIcon from '../../components/IssueIcon';
 import reducer from './reducer';
 import { getStringsArray } from './actions';
 import {
@@ -35,6 +40,12 @@ const mapStateToProps = createStructuredSelector({
   err: makeSelectErr(),
   strings: makeSelectStrings(),
 });
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    dispatchGetStrings: () => dispatch(getStringsArray()),
+  };
+}
 
 const withConnect = connect(
   mapStateToProps,
@@ -58,13 +69,17 @@ export default compose(
   }, []);
 
   // Shows error message, or list of strings.
-  // Let's user know if no strings
+  // Let's user know if array is empty
   function renderedList(stringsState) {
     if (err) {
       return (
         <div>
-          <p>Something happened:</p>
+          <H3>
+            <IssueIcon className="error-message" /> Something happened
+            <IssueIcon className="error-message" />
+          </H3>
           <p>{err.message}</p>
+          <p>Please Reload Page</p>
         </div>
       );
     }
@@ -73,7 +88,7 @@ export default compose(
       if (stringsState.length === 0) {
         return (
           <div>
-            <p>Nothing has happened in our story yet</p>
+            <H3>Nothing has happened in our story yet</H3>
           </div>
         );
       }
@@ -96,7 +111,8 @@ export default compose(
               backwards. Read your mystery here.
             </p>
             <A href="/add">
-              Click Here to add towards the beginning of your mystery
+              Click Here and add preceding events to the beginning of your
+              mystery
             </A>
           </div>
         </CenteredSection>
@@ -106,9 +122,3 @@ export default compose(
     </CenteredSection>
   );
 });
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    dispatchGetStrings: () => dispatch(getStringsArray()),
-  };
-}
