@@ -25,18 +25,21 @@ const addStringReducer = (state = INITIAL_STATE, action) =>
     switch (action.type) {
       case UPDATE_CLIENT_STRING:
         draft.clientString = action.clientString;
+        draft.prepended = false;
         break;
 
       case POST_STRING:
         draft.isLoading = true;
+        draft.err = false;
         break;
 
       case PREPENDED_STRING:
         draft.isLoading = false;
-        draft.prepended = action.prepended;
+        draft.prepended = true;
         break;
 
       case POST_STRING_ERR:
+        draft.isLoading = false;
         draft.prepended = false;
         draft.err = action.err;
         break;

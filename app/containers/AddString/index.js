@@ -16,12 +16,14 @@ import saga from './saga';
 import messages from './messages';
 import CenteredSection from './CenteredSection';
 import A from '../../components/A';
+import LoadingIndicator from '../../components/LoadingIndicator';
+import IssueIcon from '../../components/IssueIcon';
 import {
   makeSelectClientString,
   makeSelectIsLoading,
   makeSelectErr,
 } from './selectors';
-import { postString, updateClientString, postSringsError } from './actions';
+import { postString, updateClientString } from './actions';
 import reducer from './reducer';
 
 const key = 'addString';
@@ -34,7 +36,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onUpdateClientString: evt => dispatch(updateClientString(evt.target.value)),
+    onUpdate: evt => dispatch(updateClientString(evt.target.value)),
     onSubmit: evt => {
       if (
         evt !== undefined &&
@@ -42,12 +44,10 @@ export function mapDispatchToProps(dispatch) {
         // regex checks if at least one character is not whitespace
         // pulled from https://stackoverflow.com/questions/2249460/how-to-use-javascript-regex-to-check-for-empty-form-fields
         /([^\s])/.test(evt.target.value)
-      ) {
+      )
         evt.preventDefault();
-        dispatch(postString());
-        dispatch(updateClientString(''));
-      }
-      dispatch(postSringsError());
+      dispatch(postString());
+      dispatch(updateClientString(''));
     },
   };
 }
@@ -68,8 +68,33 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(function AddString({ clientString, onSubmit, onUpdateClientString }) {
+)(function AddString({
+  clientString,
+  onSubmit,
+  onUpdate,
+  err,
+  prepended,
+  isLoading,
+}) {
   const listStyle = { listStyleType: 'none' };
+
+  const errorNotification = () => (
+    <div>
+      <p>
+        <IssueIcon />
+        An error occured
+        <IssueIcon />
+      </p>
+      <p>{err.message}</p>
+      <p>Please try again</p>
+    </div>
+  );
+
+  const postSuccess = () => (
+    <div>
+      <p>Successfully added to your story! </p>
+    </div>
+  );
 
   return (
     <CenteredSection>
@@ -98,7 +123,7 @@ export default compose(
                 id="clientString"
                 type="text"
                 value={clientString}
-                onChange={onUpdateClientString}
+                onChange={onUpdate}
               />
             </label>
             <button type="submit">Submit</button>
@@ -106,6 +131,9 @@ export default compose(
         </div>
         <br />
         <br />
+        {isLoading && <LoadingIndicator />}
+        {err && errorNotification()}
+        {prepended && postSuccess()}
         <A href="/">See your mystery so far...</A>
       </div>
     </CenteredSection>

@@ -26,9 +26,9 @@ export function prependedString(prepended) {
   };
 }
 
-export function postSringsError(clientString) {
+export function postSringsError(err) {
   return {
     type: POST_STRING_ERR,
-    clientString,
+    err,
   };
 }
